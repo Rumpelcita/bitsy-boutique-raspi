@@ -15,7 +15,7 @@ function captureKeyboard(){
                 exitPlayScreen();
                 break;
             default:
-                playGame();
+                break;
         }
     }
 }
