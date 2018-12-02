@@ -1,22 +1,32 @@
 var selectedGameId = null;
 
-function start(){
-    recreateGameList();
+function start() {
     captureKeyboard();
+    recreateGameList();
 }
 
-function captureKeyboard(){
-    document.onkeydown = function(e) { 
-        switch(e) {
-            case e.which == 69: //e key press
+function captureKeyboard() {
+    const frame = document.getElementById("game_frame");
+    document.onkeydown = function (e) {
+        switch (e.which) {
+            case 69: //e key press
                 playGame();
                 break;
-            case e.which == 88: //x key press
+            case 88: //x key press
                 exitPlayScreen();
                 break;
             default:
+                // forward any other event to game
+                frame.contentDocument.dispatchEvent(
+                    new KeyboardEvent('keydown', { key: e.key, keyCode: e.keyCode }) // TODO: make sure to copy any event props bitsy uses
+                );
                 break;
         }
+    }
+    document.onkeyup = function(e) {
+        frame.contentDocument.dispatchEvent(
+            new KeyboardEvent('keyup', { key: e.key, keyCode: e.keyCode }) // TODO: make sure to copy any event props bitsy uses
+        );
     }
 }
 
@@ -92,7 +102,6 @@ function playGame(gameId) {
 
         window.setTimeout(function(){
             frame.src = game.src;
-            frame.focus();
         }, 200);
     }
 }
