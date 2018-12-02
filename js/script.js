@@ -20,6 +20,7 @@ function captureKeyboard() {
                 frame.contentDocument.dispatchEvent(
                     new KeyboardEvent('keydown', { key: e.key, keyCode: e.keyCode }) // TODO: make sure to copy any event props bitsy uses
                 );
+                break;
         }
     }
     document.onkeyup = function(e) {

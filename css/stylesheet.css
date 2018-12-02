@@ -10,6 +10,18 @@ html, body {
     transition: background 1s, color 1s;
 }
 
+.game_card:hover {
+    border: 1px;
+    border-style: dotted;
+    border-color: black;
+}
+
+.game_card:active {
+    border: 1px;
+    border-style: solid;
+    border-color: black;
+}
+
 #play_screen {
     width: 100%;
     height: 100%;
