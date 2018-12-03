@@ -6,7 +6,7 @@ function start() {
 }
 
 function captureKeyboard() {
-    const frame = $("#game_frame");
+    const frame = document.getElementById("game_frame");
     document.onkeydown = function (e) {
         switch (e.which) {
             case 69: //e key press
@@ -37,15 +37,15 @@ function captureKeyboard() {
 }
 
 function recreateGameList() {
-    $("#game_frame").src = "";
-	$("#select_screen").style.display = "block";
-	$("#play_screen").style.display = "none";
-    $("#game_select").innerHTML = "";
+    document.getElementById("game_frame").src = "";
+	document.getElementById("select_screen").style.display = "block";
+	document.getElementById("play_screen").style.display = "none";
+    document.getElementById("game_select").innerHTML = "";
     
 	var shuffledGames = makeShuffledGameList();
 	for(var i in shuffledGames) {
 		var gameId = shuffledGames[i];
-		$("#game_select").appendChild( makeGameCard(gameId) );
+		document.getElementById("game_select").appendChild( makeGameCard(gameId) );
 	}
 }
 
@@ -95,15 +95,15 @@ function makeGameCard(gameId) {
 }
 
 function playGame(gameId) {
-    if ($("#play_screen").style.display == "none"){
+    if (document.getElementById("play_screen").style.display == "none"){
         var game = mixtape_games[gameId];
 
         selectedGameId = gameId;
 
-        $("#select_screen").style.display = "none";
-        $("#play_screen").style.display = "block";
+        document.getElementById("select_screen").style.display = "none";
+        document.getElementById("play_screen").style.display = "block";
 
-        var frame = $("#game_frame");
+        var frame = document.getElementById("game_frame");
         frame.src = "";
 
         window.setTimeout(function(){
@@ -113,7 +113,7 @@ function playGame(gameId) {
 }
 
 function exitPlayScreen() {
-    if ($("#play_screen").style.display == "block"){
+    if (document.getElementById("play_screen").style.display == "block"){
         recreateGameList();
     }
 }
