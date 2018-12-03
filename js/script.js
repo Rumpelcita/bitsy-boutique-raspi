@@ -6,15 +6,21 @@ function start() {
 }
 
 function captureKeyboard() {
-    const frame = document.getElementById("game_frame");
+    const frame = $("#game_frame");
     document.onkeydown = function (e) {
         switch (e.which) {
             case 69: //e key press
-                playGame();
+                playGame(selectedGameId);
                 break;
             case 88: //x key press
                 exitPlayScreen();
                 break;
+            case 38: //arrow up key press
+                
+            break;
+            case 40: //arrow down key press
+                
+            break;
             default:
                 // forward any other event to game
                 frame.contentDocument.dispatchEvent(
@@ -31,15 +37,15 @@ function captureKeyboard() {
 }
 
 function recreateGameList() {
-    document.getElementById("game_frame").src = "";
-	document.getElementById("select_screen").style.display = "block";
-	document.getElementById("play_screen").style.display = "none";
-    document.getElementById("game_select").innerHTML = "";
+    $("#game_frame").src = "";
+	$("#select_screen").style.display = "block";
+	$("#play_screen").style.display = "none";
+    $("#game_select").innerHTML = "";
     
 	var shuffledGames = makeShuffledGameList();
 	for(var i in shuffledGames) {
 		var gameId = shuffledGames[i];
-		document.getElementById("game_select").appendChild( makeGameCard(gameId) );
+		$("#game_select").appendChild( makeGameCard(gameId) );
 	}
 }
 
@@ -89,15 +95,15 @@ function makeGameCard(gameId) {
 }
 
 function playGame(gameId) {
-    if (document.getElementById("play_screen").style.display == "none"){
+    if ($("#play_screen").style.display == "none"){
         var game = mixtape_games[gameId];
 
         selectedGameId = gameId;
 
-        document.getElementById("select_screen").style.display = "none";
-        document.getElementById("play_screen").style.display = "block";
+        $("#select_screen").style.display = "none";
+        $("#play_screen").style.display = "block";
 
-        var frame = document.getElementById("game_frame");
+        var frame = $("#game_frame");
         frame.src = "";
 
         window.setTimeout(function(){
@@ -107,9 +113,7 @@ function playGame(gameId) {
 }
 
 function exitPlayScreen() {
-    if (document.getElementById("play_screen").style.display == "block"){
+    if ($("#play_screen").style.display == "block"){
         recreateGameList();
-
-        selectGame(selectedGameId);
     }
 }
