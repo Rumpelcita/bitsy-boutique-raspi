@@ -63,6 +63,7 @@ function selectGame(index)
 {
     gameSelect.children[selectedGameIndex].style = "";
     selectedGameIndex = index;
+    selectedGameId = shuffledGames[selectedGameIndex];
     gameSelect.children[selectedGameIndex].style = "color: red;";
 }
 
