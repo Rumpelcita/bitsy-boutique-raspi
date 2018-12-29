@@ -27,11 +27,21 @@ function captureKeyboard() {
                     exitPlayScreen();
                     break;
                 case 38: //arrow up key press
-                    selectGame((selectedGameIndex - 1) % shuffledGames.length);
+                    var tempIndexUp = selectedGameIndex - 1;
+                    if (tempIndexUp >= 0) {
+                        selectGame(tempIndexUp);
+                    } else {
+                        selectGame(shuffledGames.length - 1);
+                    }
                     e.preventDefault();
                 break;
                 case 40: //arrow down key press
-                    selectGame((selectedGameIndex + 1) % shuffledGames.length);
+                    var tempIndexDown = selectedGameIndex + 1;
+                    if (tempIndexDown < shuffledGames.length) {
+                        selectGame(tempIndexDown);
+                    } else {
+                        selectGame(0);
+                    }
                     e.preventDefault();
                 break;
             }
