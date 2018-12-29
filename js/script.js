@@ -1,4 +1,8 @@
 var selectedGameId = null;
+let shuffledGames = null;
+
+let selectedGameIndex = 0;
+let gameSelect = null;
 
 function start() {
     captureKeyboard();
@@ -16,10 +20,12 @@ function captureKeyboard() {
                 exitPlayScreen();
                 break;
             case 38: //arrow up key press
-                
+                selectGame((selectedGameIndex - 1) % shuffledGames.length);
+                e.preventDefault();
             break;
             case 40: //arrow down key press
-                
+                selectGame((selectedGameIndex + 1) % shuffledGames.length);
+                e.preventDefault();
             break;
             default:
                 // forward any other event to game
@@ -42,11 +48,22 @@ function recreateGameList() {
 	document.getElementById("play_screen").style.display = "none";
     document.getElementById("game_select").innerHTML = "";
     
-	var shuffledGames = makeShuffledGameList();
+    gameSelect = document.getElementById("game_select");
+
+	shuffledGames = makeShuffledGameList();
 	for(var i in shuffledGames) {
 		var gameId = shuffledGames[i];
-		document.getElementById("game_select").appendChild( makeGameCard(gameId) );
-	}
+		gameSelect.appendChild( makeGameCard(gameId) );
+    }
+    
+    selectGame(0);
+}
+
+function selectGame(index)
+{
+    gameSelect.children[selectedGameIndex].style = "";
+    selectedGameIndex = index;
+    gameSelect.children[selectedGameIndex].style = "color: red;";
 }
 
 function makeShuffledGameList() {
