@@ -52,7 +52,7 @@ function recreateGameList() {
     gameSelect = document.getElementById("game_select");
 
 	shuffledGames = makeShuffledGameList();
-	for(var i in mixtape_games) {
+	for(var i in shuffledGames) {
 		var gameId = shuffledGames[i];
 		gameSelect.appendChild( makeGameCard(gameId) );
     }
