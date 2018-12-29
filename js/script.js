@@ -7,6 +7,27 @@ function start() {
 
 function captureKeyboard() {
     const frame = document.getElementById("game_frame");
+    var li = $('li');
+    var liSelected;
+    
+    if (document.getElementById("play_screen").style.display == "none"){
+        document.onkeydown = function (e) {
+            switch (e.which) {
+                case 38: //arrow up key press
+                    moveSelection();
+                    break;
+                case 40: //arrow down key press
+                    moveSelection();
+                    break;
+                default:
+                    // forward any other event to game
+                    frame.contentDocument.dispatchEvent(
+                        new_keypress('keydown', e)
+                    );
+                    break;
+            }
+        }
+    }
     document.onkeydown = function (e) {
         switch (e.which) {
             case 69: //e key press
@@ -15,25 +36,27 @@ function captureKeyboard() {
             case 88: //x key press
                 exitPlayScreen();
                 break;
-            case 38: //arrow up key press
-                
-            break;
-            case 40: //arrow down key press
-                
-            break;
             default:
                 // forward any other event to game
                 frame.contentDocument.dispatchEvent(
-                    new KeyboardEvent('keydown', { key: e.key, keyCode: e.keyCode }) // TODO: make sure to copy any event props bitsy uses
+                    new_keypress('keydown', e)
                 );
                 break;
         }
     }
     document.onkeyup = function(e) {
         frame.contentDocument.dispatchEvent(
-            new KeyboardEvent('keyup', { key: e.key, keyCode: e.keyCode }) // TODO: make sure to copy any event props bitsy uses
+            new_keypress('keyup', e)
         );
     }
+}
+
+function new_keypress(keytype, e) {
+    return new KeyboardEvent(keytype, { key: e.key, keyCode: e.keyCode })
+}
+
+function moveSelection() {
+    console.log("selection moved");
 }
 
 function recreateGameList() {
@@ -41,12 +64,15 @@ function recreateGameList() {
 	document.getElementById("select_screen").style.display = "block";
 	document.getElementById("play_screen").style.display = "none";
     document.getElementById("game_select").innerHTML = "";
+    var ul = document.createElement("ul");
+    
     
 	var shuffledGames = makeShuffledGameList();
 	for(var i in shuffledGames) {
 		var gameId = shuffledGames[i];
-		document.getElementById("game_select").appendChild( makeGameCard(gameId) );
-	}
+		ul.appendChild( makeGameCard(gameId) );
+    }
+    document.getElementById("game_select").appendChild(ul);
 }
 
 function makeShuffledGameList() {
@@ -71,8 +97,8 @@ function shuffle(options) {
 function makeGameCard(gameId) {
 	var game = mixtape_games[gameId];
 
-	var div = document.createElement("div");
-	div.onclick = function() {
+	var li = document.createElement("li");
+	li.onclick = function() {
 		if(selectedGameId != gameId) {
 			selectedGameId = gameId;
 		}
@@ -80,18 +106,18 @@ function makeGameCard(gameId) {
 			playGame(gameId);
 		}
 	};
-	div.id = "card_" + gameId;
-	div.classList.add("game_card");
+	li.id = "card_" + gameId;
+	li.classList.add("game_card");
 
 	var title = document.createElement("h4");
 	title.innerText = game.title;
-	div.appendChild(title);
+	li.appendChild(title);
 
 	var author = document.createElement("h5");
 	author.innerText = game.author;
-	div.appendChild(author);
+	li.appendChild(author);
 
-	return div;
+	return li;
 }
 
 function playGame(gameId) {
