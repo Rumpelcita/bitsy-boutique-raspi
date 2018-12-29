@@ -12,41 +12,57 @@ function start() {
 function captureKeyboard() {
     const frame = document.getElementById("game_frame");
     let play_screen_display = document.getElementById("play_screen").style.display
-    document.onkeydown = function (e) {
-        switch (e.which) {
-            case 69: //e key press
-                playGame(shuffledGames[selectedGameIndex]);
+    
+    document.onkeydown = e =>
+    {
+        let playing = !document.getElementById("play_screen").hidden;
+
+        if (!playing || e.which == 88)
+        {
+            switch (e.which) {
+                case 69: //e key press
+                    playGame(shuffledGames[selectedGameIndex]);
+                    break;
+                case 88: //x key press
+                    exitPlayScreen();
+                    break;
+                case 38: //arrow up key press
+                    selectGame((selectedGameIndex - 1) % shuffledGames.length);
+                    e.preventDefault();
                 break;
-            case 88: //x key press
-                exitPlayScreen();
+                case 40: //arrow down key press
+                    selectGame((selectedGameIndex + 1) % shuffledGames.length);
+                    e.preventDefault();
                 break;
-            case 38: //arrow up key press
-                selectGame((selectedGameIndex - 1) % shuffledGames.length);
-                e.preventDefault();
-            break;
-            case 40: //arrow down key press
-                selectGame((selectedGameIndex + 1) % shuffledGames.length);
-                e.preventDefault();
-            break;
-            default:
-                // forward any other event to game
-                frame.contentDocument.dispatchEvent(
-                    new KeyboardEvent('keydown', { key: e.key, keyCode: e.keyCode }) // TODO: make sure to copy any event props bitsy uses
-                );
-                break;
+            }
         }
-    }
-    document.onkeyup = function(e) {
-        frame.contentDocument.dispatchEvent(
-            new KeyboardEvent('keyup', { key: e.key, keyCode: e.keyCode }) // TODO: make sure to copy any event props bitsy uses
-        );
+        else
+        {
+            // forward any other event to game
+            frame.contentDocument.dispatchEvent(
+                new KeyboardEvent('keydown', { key: e.key, keyCode: e.keyCode }) // TODO: make sure to copy any event props bitsy uses
+            );
+        }
+    };
+
+    document.onkeyup = function(e) 
+    {
+        let playing = !document.getElementById("play_screen").hidden;
+
+        if (playing)
+        {
+            frame.contentDocument.dispatchEvent(
+                new KeyboardEvent('keyup', { key: e.key, keyCode: e.keyCode }) // TODO: make sure to copy any event props bitsy uses
+            );
+        }
     }
 }
 
-function recreateGameList() {
+function recreateGameList()
+{
     document.getElementById("game_frame").src = "";
-	document.getElementById("select_screen").style.display = "block";
-	document.getElementById("play_screen").style.display = "none";
+	document.getElementById("select_screen").hidden = false;
+	document.getElementById("play_screen").hidden = true;
     document.getElementById("game_select").innerHTML = "";
     
     gameSelect = document.getElementById("game_select");
@@ -112,14 +128,16 @@ function makeGameCard(gameId) {
 	return div;
 }
 
-function playGame(gameId) {
-    if (document.getElementById("play_screen").style.display == "none"){
+function playGame(gameId)
+{
+    if (document.getElementById("play_screen").hidden)
+    {
         var game = mixtape_games[gameId];
 
         selectedGameId = gameId;
 
-        document.getElementById("select_screen").style.display = "none";
-        document.getElementById("play_screen").style.display = "block";
+        document.getElementById("select_screen").hidden = true;
+        document.getElementById("play_screen").hidden = false;
 
         var frame = document.getElementById("game_frame");
         frame.src = "";
@@ -130,8 +148,10 @@ function playGame(gameId) {
     }
 }
 
-function exitPlayScreen() {
-    if (document.getElementById("play_screen").style.display == "block"){
+function exitPlayScreen() 
+{
+    if (!document.getElementById("play_screen").hidden)
+    {
         recreateGameList();
     }
 }
