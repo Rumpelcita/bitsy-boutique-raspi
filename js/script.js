@@ -11,20 +11,21 @@ function start() {
 
 function captureKeyboard() {
     const frame = document.getElementById("game_frame");
+    let play_screen_display = document.getElementById("play_screen").style.display
     document.onkeydown = function (e) {
         switch (e.which) {
             case 69: //e key press
-                playGame(selectedGameId);
+                playGame(selectedGameIndex);
                 break;
             case 88: //x key press
                 exitPlayScreen();
                 break;
             case 38: //arrow up key press
-                selectGame((selectedGameIndex - 1) % shuffledGames.length);
+                selectGame((selectedGameIndex - 1) % mixtape_games.length);
                 e.preventDefault();
             break;
             case 40: //arrow down key press
-                selectGame((selectedGameIndex + 1) % shuffledGames.length);
+                selectGame((selectedGameIndex + 1) % mixtape_games.length);
                 e.preventDefault();
             break;
             default:
@@ -50,10 +51,10 @@ function recreateGameList() {
     
     gameSelect = document.getElementById("game_select");
 
-	shuffledGames = makeShuffledGameList();
-	for(var i in shuffledGames) {
-		var gameId = shuffledGames[i];
-		gameSelect.appendChild( makeGameCard(gameId) );
+	//shuffledGames = makeShuffledGameList();
+	for(var i in mixtape_games) {
+		//var gameId = shuffledGames[i];
+		gameSelect.appendChild( makeGameCard(i) );
     }
     
     selectGame(0);
