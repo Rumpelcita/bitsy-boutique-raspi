@@ -129,11 +129,15 @@ function makeGameCard(gameId) {
 
 	var title = document.createElement("h4");
 	title.innerText = game.title;
-	div.appendChild(title);
+    div.appendChild(title);
 
 	var author = document.createElement("h5");
 	author.innerText = game.author;
-	div.appendChild(author);
+    div.appendChild(author);
+    
+    var language = document.createElement("h6");
+	language.innerText = game.language;
+	div.appendChild(language);
 
 	return div;
 }

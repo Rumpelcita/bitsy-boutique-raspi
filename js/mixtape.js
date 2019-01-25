@@ -1,32 +1,57 @@
 mixtape_games = [
 	{ 
-		title : "Cat's Out of the Bag!", 
-		author : "Claire Morley",
-		src : "games/cats_out_of_the_bag.html"
-	},
-	{
-		title : "Day in the Life", 
-		author : "Ethan Clark", 
-		src : "games/day_in_the_life.html" 
+		title : "The End Was Nigh", 
+		author : "Florencia Rumpel Rodriguez",
+		language: "Inglés",
+		src : "games/end_was_nigh/index.html"
 	},
 	{ 
-		title : "Little Duck's Big Adventure", 
-		author : "Em Lindqvist", 
-		src : "games/little_duck.html", 
+		title : "Maybe I Should Just Leave", 
+		author : "Florencia Rumpel Rodriguez",
+		language: "Inglés",
+		src : "games/maybe_i_should_just_leave/index.html"
 	},
 	{ 
-		title : "The Milk and Mitten", 
-		author : "Sarah Gould", 
-		src : "games/milk_mitten.html", 
+		title : "My Way", 
+		author : "Florencia Rumpel Rodriguez",
+		language: "Inglés",
+		src : "games/my_way/index.html"
+	},
+	{ 
+		title : "Real Sad Dad", 
+		author : "Florencia Rumpel Rodriguez",
+		language: "Inglés",
+		src : "games/saddad/index.html"
+	},
+
+	{
+		title : "A Door", 
+		author : "Leno",
+		language: "Inglés", 
+		src : "games/a_door-leno.html" 
+	},
+	{ 
+		title : "Búsqueda Implacable", 
+		author : "Solchu Paletas",
+		language: "Español", 
+		src : "games/busqueda_implacable-solchupaletas.html", 
+	},
+	{ 
+		title : "Queremos Flan!", 
+		author : "Suribe",
+		language: "Español", 
+		src : "games/queremos_flan-suribe.html", 
 	},
 	{
-		title : "flotsam",
-		author : "mark wonnacott",
-		src : "games/flotsam.html",
+		title : "Stranger Point",
+		author : "lunafromthemoon",
+		language: "Inglés",
+		src : "games/stranger_point-lunafromthemoon.html",
 	},
 	{
-		title : "Space Bubble Cat",
-		author : "Emma Daues",
-		src : "games/space_bubble_cat.html"
+		title : "Una piba entra en una oficina",
+		author : "Nadia Kerzman",
+		language: "Español",
+		src : "games/una_piba_entra_en_una_oficina.html"
 	}
 ];
