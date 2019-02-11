@@ -91,6 +91,7 @@ function selectGame(index)
     gameSelect.children[selectedGameIndex].style = "";
     selectedGameIndex = index;
     gameSelect.children[selectedGameIndex].style = "color: red;";
+    gameSelect.children[selectedGameIndex].scrollIntoView({behavior: "smooth"});
 }
 
 function makeShuffledGameList() {

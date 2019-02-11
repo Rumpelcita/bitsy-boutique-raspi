@@ -53,5 +53,17 @@ mixtape_games = [
 		author : "Nadia Kerzman",
 		language: "Español",
 		src : "games/una_piba_entra_en_una_oficina.html"
-	}
+	},
+	{
+		title : "Home is...",
+		author : "Florencia Rumpel Rodriguez,\nFelipe N. Cassina, \nJulian Kopp, Nicolás 				Delfino,\n Leno, and Pablo F. Quarta",
+		language: "Español, Inglés",
+		src : "games/homeis/index.html"
+	},
+	{
+		title : "Hollow Joe Has Been Defeated",
+		author : "David T. Marchand",
+		language: "Español, Inglés",
+		src : "games/HollowJoe/index.html"
+	},
 ];
