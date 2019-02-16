@@ -90,7 +90,7 @@ function selectGame(index)
 {
     gameSelect.children[selectedGameIndex].style = "";
     selectedGameIndex = index;
-    gameSelect.children[selectedGameIndex].style = "color: red;";
+    gameSelect.children[selectedGameIndex].style = "color: #475148;";
     gameSelect.children[selectedGameIndex].scrollIntoView({behavior: "smooth"});
 }
 
